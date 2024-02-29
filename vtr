@@ -1,0 +1,42 @@
+// Defining a record type for a person
+type Person = {
+  id: Nat;
+  name: Text;
+  age: Nat;
+};
+
+// Function to find the oldest person in a list of people
+func findOldest(people: [Person]): Person {
+  var oldestPerson = people[0];
+  for (person in people) {
+    if (person.age > oldestPerson.age) {
+      oldestPerson := person;
+    };
+  };
+  return oldestPerson;
+};
+
+// Function to filter people above a certain age
+func filterByAge(people: [Person], minAge: Nat): [Person] {
+  var filteredPeople = [];
+  for (person in people) {
+    if (person.age >= minAge) {
+      filteredPeople := filteredPeople ++ [person];
+    };
+  };
+  return filteredPeople;
+};
+
+// Example usage of the functions
+let people: [Person] = [
+  { id = 1; name = "Alice"; age = 30 },
+  { id = 2; name = "Bob"; age = 25 },
+  { id = 3; name = "Charlie"; age = 35 },
+  { id = 4; name = "David"; age = 40 }
+];
+
+let oldestPerson = findOldest(people);
+println("The oldest person is ", oldestPerson.name, " aged ", toString(oldestPerson.age));
+
+let filteredPeople = filterByAge(people, 30);
+println("People aged 30 and above:", filteredPeople);
